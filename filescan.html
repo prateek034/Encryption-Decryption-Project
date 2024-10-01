@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/qrcode.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="p-5">
+    <input type="file" id="file" name="file">
+    <form action="">
+      <textarea class="hidden" id="content" name="w3review" rows="4" cols="20"></textarea>
+      <input type="submit" value="Actual data" id="actual-btn" class="my-5 actual-button text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    </form>
+    <div class=qrscanresult>
+      <p id="qr-scanresult"></p>
+    </div>
+  </div>
+
+  <!--To Read QR Code-->
+  <script type="text/javascript" src="scripts/qrReader.js"></script>
+  <script type="text/javascript" src="scripts/script1.js"></script>
+  <script type="text/javascript" src="scripts/csjmu.js"></script>
+</body>
+
+</html>

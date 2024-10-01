@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>QR Code Reader using Instascan</title>
+  <script type="text/javascript" src="instascan.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <video id="preview" class="mx-auto rounded border-2 border-blue-300 my-2"></video>
+
+  <div class=qrscanresult>
+    <p id="qr-scanresult"></p>
+  </div>
+
+  <script type="text/javascript">
+    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    scanner.addListener('scan', function (content) {
+      const qrtext = (code.decryptMessage(content, 'your_password'));
+
+      displayLoader()
+      setTimeout(() => {
+        displayData(qrtext)
+      }, 1400)
+    });
+    Instascan.Camera.getCameras().then(function (cameras) {
+      if (cameras.length > 0) {
+        scanner.start(cameras[0]);
+      } else {
+        console.error('No cameras found.');
+      }
+    }).catch(function (e) {
+      console.error(e);
+    });
+
+    let code = (function () {
+      return {
+        encryptMessage: function (messageToencrypt = '', secretkey = '') {
+          var encryptedMessage = CryptoJS.AES.encrypt(messageToencrypt, secretkey);
+          return encryptedMessage.toString();
+        },
+        decryptMessage: function (encryptedMessage = '', secretkey = '') {
+          var decryptedBytes = CryptoJS.AES.decrypt(encryptedMessage, secretkey);
+          var decryptedMessage = decryptedBytes.toString(CryptoJS.enc.Utf8);
+          decryptedMessage = JSON.parse(decryptedMessage);
+          const users = JSON.parse(localStorage.getItem('users'))
+          const currentUser = users.filter(user => user.rollNumber === decryptedMessage.rollNumber)
+
+          const details = {
+            status: currentUser.length > 0 ? 200 : 400,
+            grades: decryptedMessage,
+            userDetails: currentUser.length > 0 ? currentUser[0] : { message: 'No Record found' }
+          }
+          return details
+        }
+      }
+    })();
+
+    function displayLoader() {
+      const qrScanResultDiv = document.getElementById("qr-scanresult");
+      qrScanResultDiv.innerHTML = "<img src='./assets/Line-Preloader.gif' class='w-8 mx-auto' >";
+    }
+
+    function displayData(data) {
+      const qrScanResultDiv = document.getElementById("qr-scanresult");
+      qrScanResultDiv.innerHTML = ''
+      qrScanResultDiv.className = "p-5 border rounded bg-gray-300 w-4/5 mx-auto"
+
+      const { grades, status, userDetails } = data
+
+      const detailsDivClass = "my-2 w-96 flex justify-between mx-auto px-5 py-1"
+      const gradesDetailsDivClass = 'my-2 w-96 mx-auto px-5 py-1'
+
+      const collegeNameDiv = document.createElement('div')
+      const nameDetailsDiv = document.createElement('div')
+      const collegeDetailsDiv = document.createElement('div')
+      const gradeDetailsDiv = document.createElement('div')
+
+      nameDetailsDiv.className = detailsDivClass
+      collegeDetailsDiv.className = detailsDivClass
+      gradeDetailsDiv.className = gradesDetailsDivClass
+
+      const collegeNameH = document.createElement('h1')
+      const firstNameSpan = document.createElement('span')
+      const lastNameSpan = document.createElement('span')
+      const rollNumberSpan = document.createElement('span')
+
+      const batchSpan = document.createElement('span')
+      const branchSpan = document.createElement('span')
+      const collegeSpan = document.createElement('span')
+
+      // college name
+      collegeNameH.innerHTML = 'Chhatrapati ShahuJi Maharaj University'
+      collegeNameH.className = 'text-2xl text-center'
+
+      // name details
+      firstNameSpan.innerHTML = userDetails.firstName
+      lastNameSpan.innerHTML = userDetails.lastName
+      rollNumberSpan.innerHTML = userDetails.rollNumber
+
+      // college details
+      batchSpan.innerHTML = userDetails.batch
+      branchSpan.innerHTML = userDetails.branchName
+      collegeSpan.innerHTML = userDetails.collegeName
+
+      // creating and appending grades
+      grades.subjects.map((obj, ind) => {
+        const gradesContainer = document.createElement('div')
+        const subjectSpan = document.createElement('span')
+        const gradeSpan = document.createElement('span')
+
+        subjectSpan.innerHTML = obj.code
+        gradeSpan.innerHTML = obj.grade
+
+        subjectSpan.className = "uppercase"
+
+        gradesContainer.className = "flex justify-between my-1 border-b py-1"
+
+        gradesContainer.appendChild(subjectSpan)
+        gradesContainer.appendChild(gradeSpan)
+
+        gradeDetailsDiv.appendChild(gradesContainer)
+
+      })
+
+      // appending college name
+      collegeNameDiv.appendChild(collegeNameH)
+
+      // appending name details
+      nameDetailsDiv.appendChild(rollNumberSpan)
+      nameDetailsDiv.appendChild(firstNameSpan)
+      nameDetailsDiv.appendChild(lastNameSpan)
+
+      // appending college details
+      collegeDetailsDiv.appendChild(batchSpan)
+      collegeDetailsDiv.appendChild(branchSpan)
+      collegeDetailsDiv.appendChild(collegeSpan)
+
+      qrScanResultDiv.appendChild(collegeNameDiv)
+      qrScanResultDiv.appendChild(nameDetailsDiv)
+      qrScanResultDiv.appendChild(collegeDetailsDiv)
+      qrScanResultDiv.appendChild(gradeDetailsDiv)
+
+    }
+  </script>
+</body>
+
+</html>

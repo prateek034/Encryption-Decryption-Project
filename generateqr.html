@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CSJM University</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href=link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css"
+    integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+</head>
+</head>
+
+<body id="top">
+
+  <header>
+    <!-- NAVIGATION BAR-->
+    <div class="topnav w-screen" id="myTopnav">
+      <a href="index.html" class="active"><span class="logo">C</span>SJMU</a>
+      <a href="#callus">ABOUT US</a>
+
+      <!-- <div class="dropdown z-10">
+            <button class="dropbtn">COURSES</button>
+            <div class="dropdown-content">
+              <a href="#"></a>
+              <a href="#">STREAMS</a>
+              <a href="#">ASSESSMENT PATTERN</a>
+              <a href="#">FACULTY</a>
+            </div>
+            <i class="fa fa-angle-down"></i>
+        </div> -->
+
+      <a href="generateqr.html" class="generate-btn">GENERATE QR CODE</a>
+
+      <a href="verify.html" class="main">VERIFY DOCUMENT</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+      <a href="login.html" id="loginLogout"></a>
+    </div>
+
+    <div class="textbox p-5 w-11/12 mx-auto mt-24">
+      <div class="my-5">
+        <h1 class="text-xl">Enter data for QR Generation</h1>
+      </div>
+
+      <div>
+        <form id="userForm" method="post">
+          <div class="grid xl:grid-cols-2 xl:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="roll_number" id="roll_number"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="roll_number"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Roll
+                number</label>
+            </div>
+          </div>
+
+          <div class="grid xl:grid-cols-2 xl:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="subject_1" id="subject_1"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="subject_1"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Subject 1</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="grade_1" id="grade_1"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="grade_1"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Grades</label>
+            </div>
+          </div>
+
+          <div class="grid xl:grid-cols-2 xl:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="subject_2" id="subject_2"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="subject_2"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Subject 2</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="grade_2" id="grade_2"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="grade_2"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Grades</label>
+            </div>
+          </div>
+
+          <div class="grid xl:grid-cols-2 xl:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="subject_3" id="subject_3"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="subject_3"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Subject 3</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="grade_3" id="grade_3"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="grade_3"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Grades</label>
+            </div>
+          </div>
+
+          <div class="grid xl:grid-cols-2 xl:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="subject_4" id="subject_4"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="subject_4"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Subject 4</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="grade_4" id="grade_4"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="grade_4"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Grades</label>
+            </div>
+          </div>
+
+          <div class="grid xl:grid-cols-2 xl:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="subject_5" id="subject_5"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="subject_5"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Subject 5</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="grade_5" id="grade_5"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="grade_5"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Grades</label>
+            </div>
+          </div>
+
+          <div class="grid xl:grid-cols-2 xl:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+              <p>SPI</p>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="spi" id="spi"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="spi"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">SPI</label>
+            </div>
+          </div>
+
+          <div class="grid xl:grid-cols-2 xl:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+              <p>CPI</p>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="cpi" id="cpi"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" " required />
+              <label for="cpi"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">CPI</label>
+            </div>
+          </div>
+
+          <input type="submit" value="Submit" id="submit-btn" class="submit-button text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+
+        </form>
+      </div>
+    </div>
+    <br />
+    <div class="qrresult">
+      <p id="qr-result">This is default QR code:</p>
+      <canvas id="qr-code" class="mx-auto my-5"></canvas>
+    </div>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/csjmu.js"></script>
+</body>
+
+</html>
